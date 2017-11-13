@@ -1,0 +1,30 @@
+# steps to reduce spectroscopic data according to pydis
+
+1. Make combined bias frame by taking median of all bias frames, save it.
+
+2. Median average flat frames as usual, and subtract bias frames
+
+3. Flats were taken with grism and slit in position. Sum flat along spatial axis, smooth w/ 5pixel boxcar, take log of summed flux.
+fit curve to these log(flux) vs wavelength data. take 10**fit. divide median averaged flat by this wavelength response curve. Save flat.
+
+4. Do ArNeKrXe lamp spectrum fitting. The idea is to find the pixel location of peaks of known lines to produce a mapping between pixel and wavelength. End up with an array of same size as image but containing wavelengths. PyDis implements that interactively
+
+5. Load science frame, subtract bias, divide by flat, convert into cts s-1
+
+6. Extract science spectrum and apply wl solution
+
+7. Make sky spectrum and apply wl solution
+
+8. Subtract sky from science
+
+9. Photometric calibration
+
+NOTE THAT WAVELENGTH INCREASES FROM RIGHT TO LEFT ACROSS THE NIRC2 DETECTOR!
+
+
+
+
+
+
+science data:
+n0106  -  image of slit
